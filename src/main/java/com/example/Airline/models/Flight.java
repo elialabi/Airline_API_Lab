@@ -1,39 +1,56 @@
 package com.example.Airline.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Entity(name = "chocolates")
+import java.util.List;
+
+@Entity(name= "passengers")
 public class Flight {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
 
     @Column
     private Long Id;
 
     @Column
-    private String name;
+    private String destination;
 
     @Column
-    private String email;
+    private int capacity;
 
+    @Column
+    private String departureDate;
+
+    @Column
+    private String departureTime;
+
+
+    @JsonIgnoreProperties({"flights"})
     @ManyToMany
     @JoinTable(
-           name = "passenger_flights",
-            joinColumns = @JoinTable(name = "flight_id")
-            inverseJoinColumns = @JoinTable(name = "passenger_Id")
+            name = "passengers_flights",
+            joinColumns = @JoinColumn(name = "flight_id"),
+            inverseJoinColumns = @JoinColumn(name = "passenger_id")
     )
+    private List<Passenger> passengers;
 
 
-    public Flight( String name, String email ){
-        this.name = name;
-        this.email = email;
+    public Flight(String destination, int capacity, String departureDate, String departureTime){
+
+        this.destination = destination;
+        this.capacity = capacity;
+        this.departureDate = departureDate;
+        this.departureTime = departureTime;
     }
 
     public Flight(){
 
     }
+
 
     public Long getId() {
         return Id;
@@ -43,21 +60,45 @@ public class Flight {
         Id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDestination() {
+        return destination;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDestination(String destination) {
+        this.destination = destination;
     }
 
-    public String getEmail() {
-        return email;
+    public int getCapacity() {
+        return capacity;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
+
+    public String getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(String departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public String getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public List<Passenger> getPassengers() {
+        return passengers;
+    }
+
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
+
 }
-
-
