@@ -26,7 +26,7 @@ public class DataLoader implements ApplicationRunner {
         Flight flight2 = new Flight("London", 55, "2023-05-02", "15:30:00");
         flightRepository.save(flight2);
 
-        Flight flight3 = new Flight("Toyko", "50", "2023-05-03", "08:15:00");
+        Flight flight3 = new Flight("Toyko", 50, "2023-05-03", "08:15:00");
         flightRepository.save(flight3);
     }
 
